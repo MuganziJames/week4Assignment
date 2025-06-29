@@ -1,0 +1,57 @@
+{
+  "test_run_timestamp": "2025-06-29T21:04:44.429564",
+  "total_tests": 7,
+  "passed_tests": 4,
+  "failed_tests": 3,
+  "test_details": [
+    {
+      "test_name": "Valid Login Test - admin",
+      "status": "PASSED",
+      "message": "Login successful for admin",
+      "execution_time": 0.463,
+      "timestamp": "2025-06-29T21:04:49.031235"
+    },
+    {
+      "test_name": "Invalid Login Test - admin",
+      "status": "PASSED",
+      "message": "Correctly rejected invalid credentials for admin",
+      "execution_time": 0.374,
+      "timestamp": "2025-06-29T21:04:50.405860"
+    },
+    {
+      "test_name": "Invalid Login Test - wronguser",
+      "status": "PASSED",
+      "message": "Correctly rejected invalid credentials for wronguser",
+      "execution_time": 0.326,
+      "timestamp": "2025-06-29T21:04:51.732015"
+    },
+    {
+      "test_name": "Invalid Login Test - ",
+      "status": "FAILED",
+      "message": "Message: \nStacktrace:\n\tGetHandleVerifier [0x0x523b03+62899]\n\tGetHandleVerifier [0x0x523b44+62964]\n\t(No symbol) [0x0x3510f3]\n\t(No symbol) [0x0x39980e]\n\t(No symbol) [0x0x399bab]\n\t(No symbol) [0x0x3e25c2]\n\t(No symbol) [0x0x3be554]\n\t(No symbol) [0x0x3dfd81]\n\t(No symbol) [0x0x3be306]\n\t(No symbol) [0x0x38d670]\n\t(No symbol) [0x0x38e4e4]\n\tGetHandleVerifier [0x0x784793+2556483]\n\tGetHandleVerifier [0x0x77fd02+2537394]\n\tGetHandleVerifier [0x0x54a2fa+220586]\n\tGetHandleVerifier [0x0x53aae8+157080]\n\tGetHandleVerifier [0x0x54141d+184013]\n\tGetHandleVerifier [0x0x52ba68+95512]\n\tGetHandleVerifier [0x0x52bc10+95936]\n\tGetHandleVerifier [0x0x516b5a+9738]\n\tBaseThreadInitThunk [0x0x76655d49+25]\n\tRtlInitializeExceptionChain [0x0x77c5cf0b+107]\n\tRtlGetAppContainerNamedObjectPath [0x0x77c5ce91+561]\n",
+      "execution_time": 10.844,
+      "timestamp": "2025-06-29T21:05:03.576792"
+    },
+    {
+      "test_name": "Invalid Login Test - admin",
+      "status": "FAILED",
+      "message": "Message: \nStacktrace:\n\tGetHandleVerifier [0x0x523b03+62899]\n\tGetHandleVerifier [0x0x523b44+62964]\n\t(No symbol) [0x0x3510f3]\n\t(No symbol) [0x0x39980e]\n\t(No symbol) [0x0x399bab]\n\t(No symbol) [0x0x3e25c2]\n\t(No symbol) [0x0x3be554]\n\t(No symbol) [0x0x3dfd81]\n\t(No symbol) [0x0x3be306]\n\t(No symbol) [0x0x38d670]\n\t(No symbol) [0x0x38e4e4]\n\tGetHandleVerifier [0x0x784793+2556483]\n\tGetHandleVerifier [0x0x77fd02+2537394]\n\tGetHandleVerifier [0x0x54a2fa+220586]\n\tGetHandleVerifier [0x0x53aae8+157080]\n\tGetHandleVerifier [0x0x54141d+184013]\n\tGetHandleVerifier [0x0x52ba68+95512]\n\tGetHandleVerifier [0x0x52bc10+95936]\n\tGetHandleVerifier [0x0x516b5a+9738]\n\tBaseThreadInitThunk [0x0x76655d49+25]\n\tRtlInitializeExceptionChain [0x0x77c5cf0b+107]\n\tRtlGetAppContainerNamedObjectPath [0x0x77c5ce91+561]\n",
+      "execution_time": 10.708,
+      "timestamp": "2025-06-29T21:05:15.285795"
+    },
+    {
+      "test_name": "Invalid Login Test - ",
+      "status": "FAILED",
+      "message": "Message: \nStacktrace:\n\tGetHandleVerifier [0x0x523b03+62899]\n\tGetHandleVerifier [0x0x523b44+62964]\n\t(No symbol) [0x0x3510f3]\n\t(No symbol) [0x0x39980e]\n\t(No symbol) [0x0x399bab]\n\t(No symbol) [0x0x3e25c2]\n\t(No symbol) [0x0x3be554]\n\t(No symbol) [0x0x3dfd81]\n\t(No symbol) [0x0x3be306]\n\t(No symbol) [0x0x38d670]\n\t(No symbol) [0x0x38e4e4]\n\tGetHandleVerifier [0x0x784793+2556483]\n\tGetHandleVerifier [0x0x77fd02+2537394]\n\tGetHandleVerifier [0x0x54a2fa+220586]\n\tGetHandleVerifier [0x0x53aae8+157080]\n\tGetHandleVerifier [0x0x54141d+184013]\n\tGetHandleVerifier [0x0x52ba68+95512]\n\tGetHandleVerifier [0x0x52bc10+95936]\n\tGetHandleVerifier [0x0x516b5a+9738]\n\tBaseThreadInitThunk [0x0x76655d49+25]\n\tRtlInitializeExceptionChain [0x0x77c5cf0b+107]\n\tRtlGetAppContainerNamedObjectPath [0x0x77c5ce91+561]\n",
+      "execution_time": 10.656,
+      "timestamp": "2025-06-29T21:05:26.942501"
+    },
+    {
+      "test_name": "Invalid Login Test - user123",
+      "status": "PASSED",
+      "message": "Correctly rejected invalid credentials for user123",
+      "execution_time": 0.276,
+      "timestamp": "2025-06-29T21:05:28.218638"
+    }
+  ]
+}

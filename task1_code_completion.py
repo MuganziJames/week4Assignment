@@ -1,44 +1,25 @@
-# Task 1: AI-Powered Code Completion
-# Comparison of AI-suggested vs Manual Implementation
-
 import time
 import random
 from typing import List, Dict, Any
 
-# AI-Suggested Implementation (using typical Copilot/Tabnine patterns)
 def sort_dictionaries_ai_suggested(dict_list: List[Dict[str, Any]], key: str, reverse: bool = False) -> List[Dict[str, Any]]:
-    """
-    AI-suggested approach: Uses built-in sorted() with lambda
-    Typically suggested by AI tools due to conciseness and readability
-    """
     return sorted(dict_list, key=lambda x: x.get(key, 0), reverse=reverse)
 
-# Manual Implementation (more explicit approach)
 def sort_dictionaries_manual(dict_list: List[Dict[str, Any]], key: str, reverse: bool = False) -> List[Dict[str, Any]]:
-    """
-    Manual implementation: More explicit error handling and control
-    Uses operator.itemgetter for potentially better performance
-    """
     from operator import itemgetter
     
-    # Handle missing keys by filtering or providing defaults
     valid_items = []
     for item in dict_list:
         if key in item:
             valid_items.append(item)
         else:
-            # Add default value for missing keys
             item_copy = item.copy()
-            item_copy[key] = 0  # or appropriate default
+            item_copy[key] = 0
             valid_items.append(item_copy)
     
     return sorted(valid_items, key=itemgetter(key), reverse=reverse)
 
-# Performance Testing Function
 def performance_comparison():
-    """Compare performance of both implementations"""
-    
-    # Generate test data
     test_data = []
     for i in range(10000):
         test_data.append({
@@ -48,12 +29,10 @@ def performance_comparison():
             'timestamp': random.randint(1000000, 9999999)
         })
     
-    # Test AI-suggested implementation
     start_time = time.time()
     result_ai = sort_dictionaries_ai_suggested(test_data.copy(), 'score')
     ai_time = time.time() - start_time
     
-    # Test manual implementation
     start_time = time.time()
     result_manual = sort_dictionaries_manual(test_data.copy(), 'score')
     manual_time = time.time() - start_time
@@ -65,9 +44,7 @@ def performance_comparison():
     
     return ai_time, manual_time
 
-# Example usage and testing
 if __name__ == "__main__":
-    # Sample data
     sample_data = [
         {'name': 'Alice', 'score': 85, 'department': 'Engineering'},
         {'name': 'Bob', 'score': 92, 'department': 'Sales'},

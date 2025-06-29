@@ -1,19 +1,17 @@
-# Task 2: Automated Testing with AI
-# Selenium-based Login Test Automation
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 import time
 import json
 from datetime import datetime
 
 class AIEnhancedLoginTester:
     def __init__(self, headless=False):
-        """Initialize the AI-enhanced login tester"""
         self.results = {
             'test_run_timestamp': datetime.now().isoformat(),
             'total_tests': 0,
@@ -22,18 +20,17 @@ class AIEnhancedLoginTester:
             'test_details': []
         }
         
-        # Setup Chrome options
         chrome_options = Options()
         if headless:
             chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         
-        self.driver = webdriver.Chrome(options=chrome_options)
+        service = Service(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome(service=service, options=chrome_options)
         self.wait = WebDriverWait(self.driver, 10)
     
     def create_test_login_page(self):
-        """Create a simple HTML login page for testing"""
         html_content = """
         <!DOCTYPE html>
         <html>
@@ -66,7 +63,6 @@ class AIEnhancedLoginTester:
                     const password = document.getElementById('password').value;
                     const messageDiv = document.getElementById('message');
                     
-                    // Simple validation logic
                     if (username === 'admin' && password === 'password123') {
                         messageDiv.innerHTML = '<div class="success">Login successful!</div>';
                         messageDiv.className = 'success';
@@ -86,29 +82,23 @@ class AIEnhancedLoginTester:
         return 'file://' + os.path.abspath('test_login_page.html')
     
     def test_valid_login(self, username, password):
-        """Test valid login credentials"""
         test_name = f"Valid Login Test - {username}"
         start_time = time.time()
         
         try:
-            # Navigate to login page
             self.driver.get(self.create_test_login_page())
             
-            # AI-enhanced element detection with multiple strategies
             username_field = self.find_element_ai_enhanced("username", ["#username", "input[name='username']", "input[type='text']"])
             password_field = self.find_element_ai_enhanced("password", ["#password", "input[name='password']", "input[type='password']"])
             login_button = self.find_element_ai_enhanced("login", ["#loginBtn", "button[type='submit']", "input[type='submit']"])
             
-            # Enter credentials
             username_field.clear()
             username_field.send_keys(username)
             password_field.clear()
             password_field.send_keys(password)
             
-            # Click login
             login_button.click()
             
-            # Wait for result and verify success
             success_message = self.wait.until(
                 EC.presence_of_element_located((By.CLASS_NAME, "success"))
             )
@@ -123,29 +113,23 @@ class AIEnhancedLoginTester:
             return False
     
     def test_invalid_login(self, username, password):
-        """Test invalid login credentials"""
         test_name = f"Invalid Login Test - {username}"
         start_time = time.time()
         
         try:
-            # Navigate to login page
             self.driver.get(self.create_test_login_page())
             
-            # AI-enhanced element detection
             username_field = self.find_element_ai_enhanced("username", ["#username", "input[name='username']", "input[type='text']"])
             password_field = self.find_element_ai_enhanced("password", ["#password", "input[name='password']", "input[type='password']"])
             login_button = self.find_element_ai_enhanced("login", ["#loginBtn", "button[type='submit']", "input[type='submit']"])
             
-            # Enter credentials
             username_field.clear()
             username_field.send_keys(username)
             password_field.clear()
             password_field.send_keys(password)
             
-            # Click login
             login_button.click()
             
-            # Wait for error message
             error_message = self.wait.until(
                 EC.presence_of_element_located((By.CLASS_NAME, "error"))
             )
@@ -160,7 +144,6 @@ class AIEnhancedLoginTester:
             return False
     
     def find_element_ai_enhanced(self, element_type, selectors):
-        """AI-enhanced element finding with fallback strategies"""
         for selector in selectors:
             try:
                 if selector.startswith('#'):
@@ -175,7 +158,6 @@ class AIEnhancedLoginTester:
         raise NoSuchElementException(f"Could not find {element_type} element with any of the provided selectors")
     
     def record_test_result(self, test_name, passed, message, execution_time):
-        """Record test results for analysis"""
         self.results['total_tests'] += 1
         if passed:
             self.results['passed_tests'] += 1
@@ -191,16 +173,13 @@ class AIEnhancedLoginTester:
         })
     
     def run_comprehensive_test_suite(self):
-        """Run comprehensive login test suite"""
         print("Starting AI-Enhanced Login Test Suite...")
         print("="*50)
         
-        # Test valid credentials
         valid_tests = [
             ('admin', 'password123'),
         ]
         
-        # Test invalid credentials
         invalid_tests = [
             ('admin', 'wrongpassword'),
             ('wronguser', 'password123'),
@@ -210,21 +189,17 @@ class AIEnhancedLoginTester:
             ('user123', 'pass456'),
         ]
         
-        # Run valid login tests
         for username, password in valid_tests:
             self.test_valid_login(username, password)
-            time.sleep(1)  # Small delay between tests
+            time.sleep(1)
         
-        # Run invalid login tests
         for username, password in invalid_tests:
             self.test_invalid_login(username, password)
-            time.sleep(1)  # Small delay between tests
+            time.sleep(1)
         
-        # Generate summary
         self.generate_test_report()
     
     def generate_test_report(self):
-        """Generate comprehensive test report"""
         success_rate = (self.results['passed_tests'] / self.results['total_tests']) * 100
         
         print(f"\nTest Execution Summary:")
@@ -240,26 +215,22 @@ class AIEnhancedLoginTester:
             if test['status'] == 'FAILED':
                 print(f"   Error: {test['message']}")
         
-        # Save results to JSON file
         with open('test_results.json', 'w') as f:
             json.dump(self.results, f, indent=2)
         
         print(f"\nDetailed results saved to 'test_results.json'")
     
     def cleanup(self):
-        """Cleanup resources"""
         self.driver.quit()
         
-        # Clean up test file
         import os
         if os.path.exists('test_login_page.html'):
             os.remove('test_login_page.html')
 
-# Main execution
 if __name__ == "__main__":
     import os
     
-    tester = AIEnhancedLoginTester(headless=True)  # Run in headless mode
+    tester = AIEnhancedLoginTester(headless=True)
     
     try:
         tester.run_comprehensive_test_suite()
